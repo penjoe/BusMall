@@ -16,7 +16,7 @@ function SurveyImage(name , imagePath) {
 
   surveyImageList.push(this);
 }
-
+console.log(surveyImageList)
 // New instances of objects created holding each a name and a file path
 new SurveyImage('bag' , 'resources/bag.jpg');
 new SurveyImage('banana' , 'resources/banana.jpg');
@@ -47,7 +47,7 @@ var surveyImage3 = document.getElementById('survey3');
 // Function that will generate a random image from array 
 function generateRandomImage() {
 
-  var i = Math.floor(Math.random() * surveyImageList[i]);
+  var i = Math.floor(Math.random() * surveyImageList.length);
 
   // While loops checks condition against array of images and randomizes if they are the same as the current rendered image
   while (
@@ -55,7 +55,7 @@ function generateRandomImage() {
     surveyImageList[i].name === surveyImage2 ||
     surveyImageList[i].name === surveyImage3
   ) {
-    i = Math.floor(Math.random() * surveyImageList[i])
+    i = Math.floor(Math.random() * surveyImageList.length)
   }
   return surveyImageList[i];
 }
@@ -93,13 +93,32 @@ function renderSurveyResults() {
   // Variable to grab html list location
   var surveyList = document.getElementById('results-list');
 
+  // Loops through and appends results of survey to a list
   for (var i = 0; i < surveyImageList.length; i++) {
 
     var listEl = document.createElement('li');
     var results = (surveyImageList[i].name + ': ' + surveyImageList[i].totalVotes + '; ' + surveyImageList[i].timesRendered + ': appearances');
-    results.textContent = results;
-    surveyList
+    listEl.textContent = results;
+    surveyList.appendChild(listEl);
 
   }
-
 }
+
+// // Funtion for handling the event listener
+// function clickHandler(event) {
+
+//   // Variable to grab html list location
+//   var surveyResults = document.getElementById('results-list');
+//   surveyResults.innerHTML = Null;
+
+//   for (var i = 0; i < surveyImageList.length; i++) {
+
+//     if (surveyImageList[i].name === event.target.name) {
+
+//       surveyImageList[i].totalVotes
+
+//     }
+
+//   }
+
+// }
