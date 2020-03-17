@@ -9,13 +9,19 @@ header {
   height: 100px;
 }
 
+#header-group {
+  margin-left: 20px;
+}
+
 #header-logo {
   display: inline-block;
   margin: 10px;
 }
 
 #bus-mall-logo {
-  width: 125px;
+  width: 150px;
+  border-top-left-radius: 30%;
+  border-bottom-right-radius: 30%;
 }
 
 #header-h1 {
@@ -23,6 +29,10 @@ header {
   display: inline-block;
   margin-top: 10px;
   font-size: 40px;
+}
+
+#slogan {
+  font-size: 16px;
 }
 
 main {
@@ -35,13 +45,24 @@ main {
   border-radius: 10px;
   height: 800px;
   width: 260px;
-  margin: 15px;
+  margin: 40px 15px;
+}
+
+
+
+ul {
+  margin: 30px 20px 0px 20px;
+}
+
+li {
+  padding-top: 8px;
 }
 
 #survey-box {
   vertical-align: top;
-  margin-top: 15px;
+  margin-top: 40px;
   margin-left: 30px;
+  margin-bottom: 30px;
   width: 750px;
   height: 800px;
   display: inline-block;
@@ -104,4 +125,10 @@ footer {
   height: 50px;
   margin-top: 15px;
   text-align: center;
+}
+
+#footer-logo {
+  width: 100px;
+  border-top-left-radius: 30%;
+  border-bottom-right-radius: 30%;
 }

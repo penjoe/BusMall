@@ -51,9 +51,9 @@ function generateRandomImage() {
 
   // While loops checks condition against array of images and randomizes if they are the same as the current rendered image
   while (
-    surveyImageList[1].name === surveyImage1 ||
-    surveyImageList[i].name === surveyImage2 ||
-    surveyImageList[i].name === surveyImage3
+    surveyImageList[i].name === surveyImage1.name ||
+    surveyImageList[i].name === surveyImage2.name ||
+    surveyImageList[i].name === surveyImage3.name
   ) {
     i = Math.floor(Math.random() * surveyImageList.length)
   }
@@ -63,26 +63,21 @@ function generateRandomImage() {
 // Function that will render survey images onto html page
 function renderSurveyImages() {
 
-  // Variables containing new randomly generated images
-  var newSurveyImage1 = generateRandomImage();
-
   // Replaces value of existing image variables with new random images
+  var newSurveyImage1 = generateRandomImage();
   surveyImage1.src = newSurveyImage1.imagePath;
   surveyImage1.name = newSurveyImage1.name;
   newSurveyImage1.timesRendered++;
-  maxVoteRounds = maxVoteRounds++;
 
   var newSurveyImage2 = generateRandomImage();
   surveyImage2.src = newSurveyImage2.imagePath;
   surveyImage2.name = newSurveyImage2.name;
   newSurveyImage2.timesRendered++;
-  maxVoteRounds = maxVoteRounds++;
 
   var newSurveyImage3 = generateRandomImage();
   surveyImage3.src = newSurveyImage3.imagePath;
   surveyImage3.name = newSurveyImage3.name;
   newSurveyImage3.timesRendered++;
-  maxVoteRounds = maxVoteRounds++;  
 
 }
 
@@ -104,8 +99,10 @@ function renderSurveyResults() {
   }
 }
 
-// Funtion for handling the event listener
+// Function for handling the event listener
 function clickHandler(event) {
+
+  maxVoteRounds++;
 
   // Variable to grab html list location
   var surveyResults = document.getElementById('results-list');
@@ -114,20 +111,23 @@ function clickHandler(event) {
   for (var i = 0; i < surveyImageList.length; i++) {
 
     if (surveyImageList[i].name === event.target.name) {
-
       surveyImageList[i].totalVotes++;
-      maxVoteRounds++;
+      renderSurveyImages();
 
-    } if (maxVoteRounds === 25) {
-
+    } if (maxVoteRounds >= 25) {
+      surveyImage1.removeEventListener('click' , clickHandler);
+      surveyImage2.removeEventListener('click' , clickHandler);
+      surveyImage3.removeEventListener('click' , clickHandler);
       event = false;
-      alert('Thanks for participating in our survey. To the left you can see the survey results!');
+
       renderSurveyResults();
+
+      alert('Thanks for participating in our survey. To the left you can see the survey results!');
       break;
     }
 
   }
-  renderSurveyImages();
+  // renderSurveyImages();
 }
 
 surveyImage1.addEventListener('click' , clickHandler);
