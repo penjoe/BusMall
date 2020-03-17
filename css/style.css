@@ -64,6 +64,10 @@ main {
   height: 250px;
 }
 
+#survey1, #survey2, #survey3 {
+  width: 240px;
+}
+
 #survey-middle {
   display: inline-block;
   margin: auto;
