@@ -97,28 +97,39 @@ function renderSurveyResults() {
   for (var i = 0; i < surveyImageList.length; i++) {
 
     var listEl = document.createElement('li');
-    var results = (surveyImageList[i].name + ': ' + surveyImageList[i].totalVotes + '; ' + surveyImageList[i].timesRendered + ': appearances');
+    var results = (surveyImageList[i].name + ': ' + surveyImageList[i].totalVotes + ' votes; ' + surveyImageList[i].timesRendered + ': renders');
     listEl.textContent = results;
     surveyList.appendChild(listEl);
 
   }
 }
 
-// // Funtion for handling the event listener
-// function clickHandler(event) {
+// Funtion for handling the event listener
+function clickHandler(event) {
 
-//   // Variable to grab html list location
-//   var surveyResults = document.getElementById('results-list');
-//   surveyResults.innerHTML = Null;
+  // Variable to grab html list location
+  var surveyResults = document.getElementById('results-list');
+  surveyResults.innerHTML = '';
 
-//   for (var i = 0; i < surveyImageList.length; i++) {
+  for (var i = 0; i < surveyImageList.length; i++) {
 
-//     if (surveyImageList[i].name === event.target.name) {
+    if (surveyImageList[i].name === event.target.name) {
 
-//       surveyImageList[i].totalVotes
+      surveyImageList[i].totalVotes++;
+      maxVoteRounds++;
 
-//     }
+    } if (maxVoteRounds === 25) {
 
-//   }
+      event = false;
+      alert('Thanks for participating in our survey. To the left you can see the survey results!');
+      renderSurveyResults();
+      break;
+    }
 
-// }
+  }
+  renderSurveyImages();
+}
+
+surveyImage1.addEventListener('click' , clickHandler);
+surveyImage2.addEventListener('click' , clickHandler);
+surveyImage3.addEventListener('click' , clickHandler);
