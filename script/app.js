@@ -16,28 +16,155 @@ function SurveyImage(name , imagePath) {
 
   surveyImageList.push(this);
 }
-console.log(surveyImageList)
+
+
+// Chart for presenting visual data from survey
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var surveyChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [],
+        dataSets: [{
+            label: '# of Votes',
+            timesVoted: [],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+            ],
+            borderWidth: 1
+        },{
+          label: '# of Views',
+          timesRendered: [],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+          ],
+          borderWidth: 1
+      }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+function renderChart() {
+
+  for(var i = 0; i < surveyImageList.length; i++) {
+
+    surveyChart.data.labels.push(surveyImageList[i].name);
+    surveyChart.data.dataSets[0].timesVoted.push(surveyImageList[i].totalVotes);
+    surveyChart.data.dataSets[1].timesRendered.push(surveyImageList[i].timesRendered);
+  }
+};
+
 // New instances of objects created holding each a name and a file path
-new SurveyImage('bag' , 'resources/bag.jpg');
-new SurveyImage('banana' , 'resources/banana.jpg');
-new SurveyImage('bathroom' , 'resources/bathroom.jpg');
-new SurveyImage('boots' , 'resources/boots.jpg');
-new SurveyImage('breakfast' , 'resources/breakfast.jpg');
-new SurveyImage('bubblegum' , 'resources/bubblegum.jpg');
-new SurveyImage('chair' , 'resources/chair.jpg');
-new SurveyImage('cthulhu' , 'resources/cthulhu.jpg');
-new SurveyImage('dog-duck' , 'resources/dog-duck.jpg');
-new SurveyImage('dragon' , 'resources/dragon.jpg');
-new SurveyImage('pen' , 'resources/pen.jpg');
-new SurveyImage('pet-sweep' , 'resources/pet-sweep.jpg');
-new SurveyImage('scissors' , 'resources/scissors.jpg');
-new SurveyImage('shark' , 'resources/shark.jpg');
-new SurveyImage('sweep' , 'resources/sweep.png');
-new SurveyImage('tauntaun' , 'resources/tauntaun.jpg');
-new SurveyImage('unicorn' , 'resources/unicorn.jpg');
-new SurveyImage('usb' , 'resources/usb.gif');
-new SurveyImage('water-can' , 'resources/water-can.jpg');
-new SurveyImage('wine-glass' , 'resources/wine-glass.jpg');
+new SurveyImage('R2-D2 suitcase' , 'resources/bag.jpg');
+new SurveyImage('Banana slicer' , 'resources/banana.jpg');
+new SurveyImage('Bathroom iPad stand' , 'resources/bathroom.jpg');
+new SurveyImage('Rain sandals' , 'resources/boots.jpg');
+new SurveyImage('Breakfast factory' , 'resources/breakfast.jpg');
+new SurveyImage('Tasty meat gum!' , 'resources/bubblegum.jpg');
+new SurveyImage('Abstract chair' , 'resources/chair.jpg');
+new SurveyImage('Cthulhu, the Elder God' , 'resources/cthulhu.jpg');
+new SurveyImage('Doggy duck lips' , 'resources/dog-duck.jpg');
+new SurveyImage('Dragon meat' , 'resources/dragon.jpg');
+new SurveyImage('Utensil pens' , 'resources/pen.jpg');
+new SurveyImage('Pet sweep booties' , 'resources/pet-sweep.jpg');
+new SurveyImage('Pizza scissors' , 'resources/scissors.jpg');
+new SurveyImage('Shark snuggie' , 'resources/shark.jpg');
+new SurveyImage('Crawl-n-sweep' , 'resources/sweep.png');
+new SurveyImage('Hoth survival bag' , 'resources/tauntaun.jpg');
+new SurveyImage('Unicorn meat' , 'resources/unicorn.jpg');
+new SurveyImage('Cthulhu USB drive' , 'resources/usb.gif');
+new SurveyImage('Self watering can' , 'resources/water-can.jpg');
+new SurveyImage('Full nose wine glass' , 'resources/wine-glass.jpg');
 
 // Variables grabbing and storing the html location for 3 survey images
 var surveyImage1 = document.getElementById('survey1');
@@ -92,7 +219,7 @@ function renderSurveyResults() {
   for (var i = 0; i < surveyImageList.length; i++) {
 
     var listEl = document.createElement('li');
-    var results = (surveyImageList[i].name + ': ' + surveyImageList[i].totalVotes + ' votes; ' + surveyImageList[i].timesRendered + ': renders');
+    var results = (surveyImageList[i].name + ': ' + surveyImageList[i].totalVotes + ' votes; ' + surveyImageList[i].timesRendered + ': views');
     listEl.textContent = results;
     surveyList.appendChild(listEl);
 
@@ -102,11 +229,11 @@ function renderSurveyResults() {
 // Function for handling the event listener
 function clickHandler(event) {
 
-  maxVoteRounds++;
-
   // Variable to grab html list location
   var surveyResults = document.getElementById('results-list');
   surveyResults.innerHTML = '';
+
+  maxVoteRounds++;
 
   for (var i = 0; i < surveyImageList.length; i++) {
 
@@ -115,14 +242,16 @@ function clickHandler(event) {
       renderSurveyImages();
 
     } if (maxVoteRounds >= 25) {
+      event = false;
       surveyImage1.removeEventListener('click' , clickHandler);
       surveyImage2.removeEventListener('click' , clickHandler);
       surveyImage3.removeEventListener('click' , clickHandler);
-      event = false;
+      alert('Thanks for participating in our survey! Checkout what the most popular items are!');
 
       renderSurveyResults();
+      renderChart();
+      surveyChart.update();
 
-      alert('Thanks for participating in our survey. To the left you can see the survey results!');
       break;
     }
 
