@@ -4,7 +4,7 @@
 var surveyImageList = [];
 
 // Variable setting the amount of times survey can be clicked before it ends - will increment and stop at set number in loop
-var maxVoteRounds = 0;
+var maxVoteRounds = 25;
 
 // Chart for presenting visual data from survey
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -218,7 +218,7 @@ function renderSurveyResults() {
   for (var i = 0; i < surveyImageList.length; i++) {
 
     var listEl = document.createElement('li');
-    var results = (surveyImageList[i].name + ': ' + surveyImageList[i].totalVotes + ' votes; ' + surveyImageList[i].timesRendered + ': views');
+    var results = (surveyImageList[i].name + ': ' + surveyImageList[i].totalVotes + ' votes, ' + surveyImageList[i].timesRendered + ': views');
     listEl.textContent = results;
     surveyList.appendChild(listEl);
 
@@ -232,15 +232,15 @@ function clickHandler(event) {
   var surveyResults = document.getElementById('results-list');
   surveyResults.innerHTML = '';
 
-  maxVoteRounds++;
+  maxVoteRounds--;
 
   for (var i = 0; i < surveyImageList.length; i++) {
 
     if (surveyImageList[i].name === event.target.name) {
       surveyImageList[i].totalVotes++;
-      renderSurveyImages();
+      // renderSurveyImages();
 
-    } if (maxVoteRounds >= 25) {
+    } if (maxVoteRounds < 0) {
       event = false;
       surveyImage1.removeEventListener('click' , clickHandler);
       surveyImage2.removeEventListener('click' , clickHandler);
@@ -255,7 +255,7 @@ function clickHandler(event) {
     }
 
   }
-  // renderSurveyImages();
+  renderSurveyImages();
 }
 
 surveyImage1.addEventListener('click' , clickHandler);
