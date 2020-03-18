@@ -245,7 +245,7 @@ function clickHandler(event) {
       surveyImage1.removeEventListener('click' , clickHandler);
       surveyImage2.removeEventListener('click' , clickHandler);
       surveyImage3.removeEventListener('click' , clickHandler);
-      alert('Thanks for participating in our survey! Checkout what the most popular items are!');
+      alert('Thanks for participating in our survey! Check out the results to the left and down below!');
 
       renderSurveyResults();
       renderChart();
