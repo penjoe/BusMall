@@ -6,28 +6,15 @@ var surveyImageList = [];
 // Variable setting the amount of times survey can be clicked before it ends - will increment and stop at set number in loop
 var maxVoteRounds = 0;
 
-// Constructor function that will generate new images for the survey
-function SurveyImage(name , imagePath) {
-
-  this.name = name;
-  this.imagePath = imagePath;
-  this.totalVotes = 0;
-  this.timesRendered = 0;
-
-  surveyImageList.push(this);
-}
-
-
 // Chart for presenting visual data from survey
-
 var ctx = document.getElementById('myChart').getContext('2d');
 var surveyChart = new Chart(ctx, {
     type: 'bar',
     data: {
         labels: [],
-        dataSets: [{
+        datasets: [{
             label: '# of Votes',
-            timesVoted: [],
+            data: [],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -75,7 +62,7 @@ var surveyChart = new Chart(ctx, {
             borderWidth: 1
         },{
           label: '# of Views',
-          timesRendered: [],
+          data: [],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -134,13 +121,25 @@ var surveyChart = new Chart(ctx, {
     }
 });
 
+// Constructor function that will generate new images for the survey
+function SurveyImage(name , imagePath) {
+
+  this.name = name;
+  this.imagePath = imagePath;
+  this.totalVotes = 0;
+  this.timesRendered = 0;
+
+  surveyImageList.push(this);
+}
+
+// Function to populate data into chart
 function renderChart() {
 
   for(var i = 0; i < surveyImageList.length; i++) {
 
     surveyChart.data.labels.push(surveyImageList[i].name);
-    surveyChart.data.dataSets[0].timesVoted.push(surveyImageList[i].totalVotes);
-    surveyChart.data.dataSets[1].timesRendered.push(surveyImageList[i].timesRendered);
+    surveyChart.data.datasets[0].data.push(surveyImageList[i].totalVotes);
+    surveyChart.data.datasets[1].data.push(surveyImageList[i].timesRendered);
   }
 };
 
