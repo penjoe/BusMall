@@ -61,51 +61,51 @@ var surveyChart = new Chart(ctx, {
             ],
             borderWidth: 1
         },{
-          label: '# of Views',
-          data: [],
-          backgroundColor: [
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-            'hsla(239, 100%, 50%, 0.3)',
-          ],
-          borderColor: [
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
-            'hsla(239, 100%, 50%, 0.7)',
+            label: '# of Views',
+            data: [],
+            backgroundColor: [
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+                'hsla(239, 100%, 50%, 0.3)',
+            ],
+            borderColor: [
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
+                'hsla(239, 100%, 50%, 0.7)',
           ],
           borderWidth: 1
       }]
@@ -140,8 +140,20 @@ function renderChart() {
     surveyChart.data.labels.push(surveyImageList[i].name);
     surveyChart.data.datasets[0].data.push(surveyImageList[i].totalVotes);
     surveyChart.data.datasets[1].data.push(surveyImageList[i].timesRendered);
+    localStorage.setItem('surveyImageList', JSON.stringify(surveyImageList));
   }
 };
+
+function renderLocalStorage() {
+
+  for(var i = 0; i < surveyImageList.length; i++) {
+
+    surveyChart.data.labels.push(surveyImageList[i].name);
+    surveyChart.data.datasets[0].data.push(surveyImageList[i].totalVotes);
+    surveyChart.data.datasets[1].data.push(surveyImageList[i].timesRendered);
+    surveyImageList = JSON.parse(localStorage.surveyImageList);
+    }
+  }
 
 // New instances of objects created holding each a name and a file path
 new SurveyImage('R2-D2 suitcase' , 'resources/bag.jpg');
@@ -162,7 +174,6 @@ new SurveyImage('Crawl-n-sweep' , 'resources/sweep.png');
 new SurveyImage('Hoth survival bag' , 'resources/tauntaun.jpg');
 new SurveyImage('Unicorn meat' , 'resources/unicorn.jpg');
 new SurveyImage('Cthulhu USB drive' , 'resources/usb.gif');
-new SurveyImage('Self watering can' , 'resources/water-can.jpg');
 new SurveyImage('Full nose wine glass' , 'resources/wine-glass.jpg');
 
 // Variables grabbing and storing the html location for 3 survey images
@@ -227,37 +238,63 @@ function renderSurveyResults() {
 
 // Function for handling the event listener
 function clickHandler(event) {
+  
+    // Variable to grab html list location
+    var surveyResults = document.getElementById('results-list');
+    surveyResults.innerHTML = '';
 
-  // Variable to grab html list location
-  var surveyResults = document.getElementById('results-list');
-  surveyResults.innerHTML = '';
+    maxVoteRounds--;
+    if (!localStorage.surveyImageList) {
+      
+      for (var i = 0; i < surveyImageList.length; i++) {
 
-  maxVoteRounds--;
+        if (surveyImageList[i].name === event.target.name) {
+          surveyImageList[i].totalVotes++;
+          renderSurveyImages();
+  
+        } if (maxVoteRounds < 0) {
+          event = false;
+          surveyImage1.removeEventListener('click' , clickHandler);
+          surveyImage2.removeEventListener('click' , clickHandler);
+          surveyImage3.removeEventListener('click' , clickHandler);
+          alert('Thanks for participating in our survey! Check out the results to the left and down below!');
+  
+          renderSurveyResults();
+          renderChart();
+          surveyChart.update();
+  
+          break;
+        }   
+      }      
+    } else {
 
-  for (var i = 0; i < surveyImageList.length; i++) {
-
-    if (surveyImageList[i].name === event.target.name) {
-      surveyImageList[i].totalVotes++;
-      // renderSurveyImages();
-
-    } if (maxVoteRounds < 0) {
       event = false;
-      surveyImage1.removeEventListener('click' , clickHandler);
-      surveyImage2.removeEventListener('click' , clickHandler);
-      surveyImage3.removeEventListener('click' , clickHandler);
-      alert('Thanks for participating in our survey! Check out the results to the left and down below!');
-
-      renderSurveyResults();
-      renderChart();
-      surveyChart.update();
-
-      break;
-    }
-
+          surveyImage1.removeEventListener('click' , clickHandler);
+          surveyImage2.removeEventListener('click' , clickHandler);
+          surveyImage3.removeEventListener('click' , clickHandler);
+          alert('Thanks for participating in our survey! Check out the results to the left and down below!');
+  
+          renderSurveyResults();
+          renderLocalStorage();
+          surveyChart.update();
+    
+    renderSurveyImages();
   }
-  renderSurveyImages();
 }
 
 surveyImage1.addEventListener('click' , clickHandler);
 surveyImage2.addEventListener('click' , clickHandler);
 surveyImage3.addEventListener('click' , clickHandler);
+
+function refreshClicks() {
+  if (localStorage.surveyImageList) {
+    renderSurveyResults();
+    renderLocalStorage();
+    surveyChart.update();
+    surveyImage1.removeEventListener('click' , clickHandler);
+    surveyImage2.removeEventListener('click' , clickHandler);
+    surveyImage3.removeEventListener('click' , clickHandler);
+  } 
+}
+
+refreshClicks();
